@@ -1,0 +1,111 @@
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f8f8f8;
+  border-radius: 4px;
+}
+
+.survey-form {
+  margin-bottom: 80px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input[type='text'],
+input[type='date'] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.button-group{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.auto-fill-btn,
+.add-row-btn,
+.update-row-btn,
+.cancel-edit-btn,
+.save-excel-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.auto-fill-btn {
+  background-color: #008cba;
+  color: #fff;
+  border: none;
+}
+
+.add-row-btn,
+.update-row-btn {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+}
+
+.cancel-edit-btn {
+  background-color: #f9a825;
+  color: #fff;
+  border: none;
+}
+
+.save-excel-btn {
+  background-color: #f44336;
+  color: #fff;
+  border: none;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.data-table th,
+.data-table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #050404;
+}
+
+.data-table th {
+  background-color: #f2f2f2;
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 4px;
+  margin:4px
+}
+
+.edit-btn {
+  background-color: #2196f3;
+  color: #fff;
+  border: none;
+}
+
+.delete-btn {
+  background-color: #f44336;
+  color: #fff;
+  border: none;
+}

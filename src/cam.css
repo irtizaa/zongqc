@@ -1,0 +1,47 @@
+.capture-pic-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .camera-controls {
+    margin-bottom: 20px;
+  }
+  
+  video {
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  .capture-controls {
+    margin-top: 20px;
+  }
+  
+  button {
+    padding: 10px 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  .captured-image-container {
+    margin-top: 20px;
+  }
+  
+  .captured-image {
+    max-width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
