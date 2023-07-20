@@ -9,6 +9,8 @@ import Home from './HomeScreen'
 
 function App() {
   
+
+  // Try for Push on Git
   const [showComponent1, setShowComponent1] = useState(false);
   const [showComponent2, setShowComponent2] = useState(false);
   const [showComponent3, setShowComponent3] = useState(false);
@@ -39,8 +41,8 @@ function App() {
         <button onClick={() => handleButtonClick('QCform')}>OSP Form</button>
         &nbsp; &nbsp;&nbsp;
       <button onClick={() => handleButtonClick('ISPForm')}>ISP Form</button>
-      {/* &nbsp; &nbsp;&nbsp;
-      <button onClick={() => handleButtonClick('Camera')}>Camera</button> */}
+      &nbsp; &nbsp;&nbsp;
+      <button onClick={() => handleButtonClick('Camera')}>Camera To Take Snap</button>
       </div>
 
       {showComponent1 && <QCform />}

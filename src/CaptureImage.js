@@ -8,20 +8,13 @@ const CapturePic = () => {
   const [isCameraActive, setIsCameraActive] = useState(false);
   const [selectedCamera, setSelectedCamera] = useState(null);
   const [availableCameras, setAvailableCameras] = useState([]);
-  const [zoomValue, setZoomValue] = useState(1);
 
   useEffect(() => {
     const getAvailableCameras = async () => {
       try {
         const devices = await navigator.mediaDevices.enumerateDevices();
         const videoDevices = devices.filter(device => device.kind === 'videoinput');
-        const backCamera = videoDevices.find(device => device.label.toLowerCase().includes('back'));
-        if (backCamera) {
-          setSelectedCamera(backCamera.deviceId);
-          setAvailableCameras([backCamera]);
-        } else {
-          console.error('No back camera found');
-        }
+        setAvailableCameras(videoDevices);
       } catch (error) {
         console.error('Error accessing video devices:', error);
       }
@@ -32,15 +25,7 @@ const CapturePic = () => {
 
   const getCameraStream = async (deviceId) => {
     try {
-      const constraints = {
-        video: {
-          deviceId: { exact: deviceId },
-          facingMode: 'environment', // Use the back camera
-          width: { ideal: 4096 }, // Excellent camera quality width
-          height: { ideal: 2160 }, // Excellent camera quality height
-          advanced: [{ zoom: zoomValue }], // Apply initial zoom value
-        },
-      };
+      const constraints = { video: { deviceId: { exact: deviceId } } };
       const stream = await navigator.mediaDevices.getUserMedia(constraints);
       videoRef.current.srcObject = stream;
       setIsCameraActive(true);
@@ -52,12 +37,9 @@ const CapturePic = () => {
   const handleStartCamera = () => {
     if (availableCameras.length > 0) {
       const backCamera = availableCameras.find(device => device.label.toLowerCase().includes('back'));
-      if (backCamera) {
-        setSelectedCamera(backCamera.deviceId);
-        getCameraStream(backCamera.deviceId);
-      } else {
-        console.error('No back camera found');
-      }
+      const cameraToUse = backCamera || availableCameras[0];
+      setSelectedCamera(cameraToUse.deviceId);
+      getCameraStream(cameraToUse.deviceId);
     } else {
       console.error('No video input devices found');
     }
@@ -104,33 +86,11 @@ const CapturePic = () => {
     setImageName('');
   };
 
-  const handleZoomIn = () => {
-    setZoomValue(prevZoomValue => Math.min(prevZoomValue + 0.1, 10)); // Set the maximum zoom level (you can adjust this value)
-  };
-
-  const handleZoomOut = () => {
-    setZoomValue(prevZoomValue => Math.max(prevZoomValue - 0.1, 1)); // Set the minimum zoom level (you can adjust this value)
-  };
-
-  useEffect(() => {
-    if (isCameraActive && videoRef.current && videoRef.current.srcObject) {
-      const stream = videoRef.current.srcObject;
-      const videoTrack = stream.getVideoTracks()[0];
-      const constraints = { advanced: [{ zoom: zoomValue }] };
-
-      videoTrack.applyConstraints(constraints).catch(error => console.error('Error applying zoom:', error));
-    }
-  }, [isCameraActive, zoomValue]);
-
   return (
     <div className="capture-pic-container">
       <div className="camera-controls">
         {isCameraActive ? (
-          <>
-            <button onClick={handleStopCamera}>Stop Camera</button>
-            <button onClick={handleZoomIn}>Zoom In</button>
-            <button onClick={handleZoomOut}>Zoom Out</button>
-          </>
+          <button onClick={handleStopCamera}>Stop Camera</button>
         ) : (
           <button onClick={handleStartCamera}>Start Camera</button>
         )}
@@ -153,3 +113,7 @@ const CapturePic = () => {
 };
 
 export default CapturePic;
+
+
+
+
